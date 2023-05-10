@@ -1,6 +1,5 @@
 package it.vincenzopicone.foodball.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,37 +14,36 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.vincenzopicone.foodball.model.Partita;
-import it.vincenzopicone.foodball.service.PartitaService;
+import it.vincenzopicone.foodball.model.Locale;
+import it.vincenzopicone.foodball.service.LocaleService;
 
 @CrossOrigin(origins =  "*", maxAge = 360000)
 @RestController
-@RequestMapping("/api/partite")
-public class PartitaController {
+@RequestMapping("/api/locale")
+public class LocaleController {
 	
-	@Autowired PartitaService partitaService;
+	@Autowired LocaleService localeService;
 	
 	@GetMapping
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getAll() {
-		return new ResponseEntity<List<Partita>>(partitaService.getAllPartite(), HttpStatus.OK);
+		return new ResponseEntity<List<Locale>>(localeService.getAllLocale(), HttpStatus.OK);
 	}
 	@GetMapping("/id/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getById(@PathVariable("id") Long id) {
-		return new ResponseEntity<>(partitaService.getPartita(id), HttpStatus.OK);
-	}
-	
-	@GetMapping("/data/{data}")
-	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<?> getclientiPerNumero(@PathVariable LocalDate data){
-		return new ResponseEntity<List<Partita>>(partitaService.getPartitaPerData(data), HttpStatus.OK);
+		return new ResponseEntity<>(localeService.getLocale(id), HttpStatus.OK);
 	}
 	@GetMapping("/pageable")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<Page<Partita>> getAllPage(Pageable pag) {
-		return new ResponseEntity<Page<Partita>>(partitaService.getAllPartitaPageable(pag), HttpStatus.OK);
+	public ResponseEntity<Page<Locale>> getAllPage(Pageable pag) {
+		return new ResponseEntity<Page<Locale>>(localeService.getAllLocalePageable(pag), HttpStatus.OK);
 	}
 	
+	@GetMapping("/nome/{nome}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getLocalePerNomeParte(@PathVariable("nome") String nome){
+		return new ResponseEntity<>(localeService.getAllLocaleByName(nome), HttpStatus.OK);
+	}
 
 }

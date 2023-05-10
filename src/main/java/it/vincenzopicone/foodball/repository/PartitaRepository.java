@@ -16,13 +16,9 @@ public interface PartitaRepository extends CrudRepository<Partita, Long>, Paging
 	public boolean existsBySquadra2(String squadra2);
 	public boolean existsByData(LocalDate data);
 	public List<Partita> findBySquadra1(String squadra1);
-	public List<Partita> findBySquadra2(String squadra2);
-	
+	public List<Partita> findBySquadra2(String squadra2);	
 	public List <Partita> findByData(LocalDate data);
 	
-//	@Query("SELECT p FROM Partita p WHERE LOWER(p.squadra1) LIKE LOWER('%' || :name || '%')")
-//	public List<Partita> searchByPartName(String name);
-//	
-//	@Query(value="SELECT p FROM Partita p ORDER BY RANDOM() LIMIT 1")
-//	Partita findByPartitaRandom();
+	@Query(value="SELECT p FROM Partita p ORDER BY RANDOM() LIMIT 1")
+	Partita findByPartitaRandom();
 }

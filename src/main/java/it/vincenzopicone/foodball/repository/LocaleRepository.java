@@ -20,10 +20,10 @@ public interface LocaleRepository extends CrudRepository<Locale, Long>, PagingAn
 	@Query(value="SELECT l FROM Locale l ORDER BY RANDOM() LIMIT 1")
 	Locale findByLocaleRandom();
 	
-//	@Query("SELECT l FROM Locale l WHERE LOWER(l.nomelocale) LIKE LOWER('%' || :name || '%')")
-//	public List<Locale> searchByPartName(String name);
-//	
-//	@Query("SELECT l FROM Locale l WHERE LOWER(l.citta) LIKE LOWER('%' || :name || '%')")
-//	public List<Locale> searchByPartNameCitta(String name);
+	@Query("SELECT l FROM Locale l WHERE LOWER(l.nomelocale) LIKE LOWER('%' || :name || '%')")
+	public List<Locale> searchByPartName(String name);
+	
+	@Query("SELECT l FROM Locale l WHERE LOWER(l.citta) LIKE LOWER('%' || :name || '%')")
+	public List<Locale> searchByPartNameCitta(String name);
 
 }

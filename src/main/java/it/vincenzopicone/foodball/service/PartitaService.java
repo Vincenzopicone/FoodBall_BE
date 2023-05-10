@@ -39,9 +39,6 @@ public class PartitaService {
 	public Page<Partita> getAllPartitaPageable(Pageable pageable) {
 		return (Page<Partita>) repo.findAll(pageable);
 	}
-//	public List<Partita> getAllPartitaByName(String name){
-//		return (List<Partita>) repo.searchByPartName(name);
-//	}
 	
 	public List <Partita> getPartitaPerData(LocalDate dataInserimento) {
 		if(!repo.existsByData(dataInserimento)) {
@@ -49,9 +46,9 @@ public class PartitaService {
 		}
 		return repo.findByData(dataInserimento);
 	}
-//	public Partita getPartitaRandom() {
-//		return repo.findByPartitaRandom();
-//	}
+	public Partita getPartitaRandom() {
+		return repo.findByPartitaRandom();
+	}
 	public String removePartita(Long id) {
 		if(!repo.existsById(id)) {
 			throw new EntityExistsException("La partita non esiste!");
