@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import it.vincenzopicone.foodball.auth.entity.User;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -36,14 +37,17 @@ public class Prenotazione {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	@ManyToOne
-	@JsonIgnoreProperties({"prenotazione"})
+	@JsonIgnoreProperties({"utente"})
 	private User utente;
 	@ManyToOne
 	@JsonIgnoreProperties({"prenotazione"})
 	private Locale locale;
-	private LocalDate data;
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@Column(nullable = false)
+	private LocalDate dataevento;
+	@Column(nullable = false)
+	private LocalDate dataprenotazione;
+	@ManyToOne
 	@JsonIgnoreProperties({"prenotazione"})
-	private List<Evento> evento;
+	private Evento evento;
 
 }

@@ -43,10 +43,15 @@ public class PrenotazioneController {
 //	public ResponseEntity<?> newPrenotazione(Prenotazione prenotazione) {
 //		return new ResponseEntity<>(prenotazioneService.creaPrenotazione(prenotazione.getLocale(), prenotazione.getEvento(), prenotazione.getUtente(), prenotazione.getData()), HttpStatus.OK);
 //	}
-	@GetMapping("/data/{data}")
+	@GetMapping("/dataprenotazione/{data}")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<?> getclientiPerNumero(@PathVariable LocalDate data){
-		return new ResponseEntity<List<Prenotazione>>(prenotazioneService.getPrenotazionePerData(data), HttpStatus.OK);
+	public ResponseEntity<?> getPrenotazioniPerData(@PathVariable LocalDate data){
+		return new ResponseEntity<List<Prenotazione>>(prenotazioneService.getPrenotazionePerDataprenotazione(data), HttpStatus.OK);
+	}
+	@GetMapping("/dataevento/{data}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getPrenotazioniPerDataEvento(@PathVariable LocalDate data){
+		return new ResponseEntity<List<Prenotazione>>(prenotazioneService.getPrenotazionePerDataevento(data), HttpStatus.OK);
 	}
 	@GetMapping("/pageable")
 	@PreAuthorize("isAuthenticated()")

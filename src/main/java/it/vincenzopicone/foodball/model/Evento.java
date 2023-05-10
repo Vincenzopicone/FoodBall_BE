@@ -48,7 +48,7 @@ public class Evento {
 	@ManyToOne
 	@JsonIgnoreProperties({"evento"})
 	private Partita partita;
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({"evento"})
 	private List<Prenotazione> prenotazione;
 

@@ -23,14 +23,11 @@ public class PrenotazioneService {
 	
 	@Autowired PrenotazioneRepository repo;
 	
-//	public Prenotazione creaPrenotazione(Locale locale, Partita partita, User utente, LocalDate data) {
-//		Prenotazione P = new Prenotazione();
-//		P.setLocale(locale);
-//		P.setPartita(partita);
-//		P.setUtente(utente);
-//		P.setData(data);
-//		return repo.save(P);
-//	}
+	
+	public Prenotazione creaPrenotazione(Prenotazione prenotazione) {
+		return repo.save(prenotazione);
+	}
+
 	
 	public List<Prenotazione> getAll() {
 		return (List<Prenotazione>) repo.findAll();
@@ -47,11 +44,17 @@ public class PrenotazioneService {
 	}
 
 	
-	public List <Prenotazione> getPrenotazionePerData(LocalDate dataInserimento) {
-		if(!repo.existsByData(dataInserimento)) {
+	public List <Prenotazione> getPrenotazionePerDataprenotazione(LocalDate dataInserimento) {
+		if(!repo.existsByDataprenotazione(dataInserimento)) {
 			throw new EntityNotFoundException("Non esistono prenotazioni con la data indicata!");
 		}
-		return repo.findByData(dataInserimento);
+		return repo.findByDataprenotazione(dataInserimento);
+	}
+	public List <Prenotazione> getPrenotazionePerDataevento(LocalDate dataInserimento) {
+		if(!repo.existsByDataevento(dataInserimento)) {
+			throw new EntityNotFoundException("Non esistono prenotazioni con la data indicata!");
+		}
+		return repo.findByDataevento(dataInserimento);
 	}
 
 	public String removePrenotazione(Long id) {

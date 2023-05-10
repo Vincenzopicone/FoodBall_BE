@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import it.vincenzopicone.foodball.model.Prenotazione;
@@ -38,9 +39,12 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
+    
     @OneToMany(mappedBy = "utente", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JsonIgnoreProperties({"utente"})
+	@JsonIgnoreProperties({"user"})
 	private List<Prenotazione> prenotazioni;
+    
+    
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),

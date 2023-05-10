@@ -17,8 +17,14 @@ import it.vincenzopicone.foodball.auth.entity.Role;
 import it.vincenzopicone.foodball.auth.repository.RoleRepository;
 import it.vincenzopicone.foodball.auth.repository.UserRepository;
 import it.vincenzopicone.foodball.auth.service.AuthService;
+import it.vincenzopicone.foodball.configuration.EventoConfiguration;
+import it.vincenzopicone.foodball.configuration.PrenotazioneConfiguration;
+import it.vincenzopicone.foodball.model.Evento;
+import it.vincenzopicone.foodball.model.Prenotazione;
+import it.vincenzopicone.foodball.service.EventoService;
 import it.vincenzopicone.foodball.service.LocaleService;
 import it.vincenzopicone.foodball.service.PartitaService;
+import it.vincenzopicone.foodball.service.PrenotazioneService;
 
 
 @Component
@@ -30,6 +36,10 @@ public class AuthRunner implements ApplicationRunner {
 	@Autowired AuthService authService;
 	@Autowired PartitaService partitaService;
 	@Autowired LocaleService localeService;
+	@Autowired EventoService eventoService;
+	@Autowired EventoConfiguration eventoConfiguration;
+	@Autowired PrenotazioneConfiguration prenotazioneConfiguration;
+	@Autowired PrenotazioneService prenotazioneService;
 	
 	private Set<Role> userRole;
 	
@@ -39,6 +49,8 @@ public class AuthRunner implements ApplicationRunner {
 		//setRoleDefault();
 		//setPartitaRandom();
 		//setLocaleRandom();
+		//setEventiRandom();
+		setPrenotazioniRandom();
 		
 		
 	}
@@ -70,6 +82,20 @@ public class AuthRunner implements ApplicationRunner {
 		for(Integer i = 0; i < 30l; i++) {
 		localeService.creaLocaleRandom(i);
 		}
+	}
+	
+	public void setEventiRandom() {
+		for(Integer i = 0; i < 30l; i++) {
+			Evento E = eventoConfiguration.eventoRandom();
+			eventoService.creaEventoRandom(E);
+			}
+	}
+	
+	public void setPrenotazioniRandom() {
+		for(Integer i = 0; i < 30l; i++) {
+			Prenotazione P = prenotazioneConfiguration.prenotazioneRandom();
+			prenotazioneService.creaPrenotazione(P);
+			}
 	}
 
 }

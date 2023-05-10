@@ -12,9 +12,10 @@ import it.vincenzopicone.foodball.model.Prenotazione;
 
 public interface PrenotazioneRepository
 		extends CrudRepository<Prenotazione, Long>, PagingAndSortingRepository<Prenotazione, Long> {
-	public boolean existsByData(LocalDate data);
-	
-	public List <Prenotazione> findByData(LocalDate data);
+	public boolean existsByDataevento(LocalDate data);	
+	public List <Prenotazione> findByDataevento(LocalDate data);
+	public boolean existsByDataprenotazione(LocalDate data);	
+	public List <Prenotazione> findByDataprenotazione(LocalDate data);
 	
 //	@Query(value="SELECT p FROM Prenotazione p ORDER BY RANDOM() LIMIT 1")
 //	Prenotazione findByPrenotazioneRandom();
