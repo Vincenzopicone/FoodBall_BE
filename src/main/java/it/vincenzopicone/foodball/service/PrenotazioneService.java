@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import it.vincenzopicone.foodball.auth.entity.User;
+import it.vincenzopicone.foodball.model.Evento;
 import it.vincenzopicone.foodball.model.Locale;
 import it.vincenzopicone.foodball.model.Partita;
 import it.vincenzopicone.foodball.model.Prenotazione;
@@ -22,10 +23,18 @@ import jakarta.persistence.EntityNotFoundException;
 public class PrenotazioneService {
 	
 	@Autowired PrenotazioneRepository repo;
+	@Autowired EventoService eventoService;
 	
 	
-	public Prenotazione creaPrenotazione(Prenotazione prenotazione) {
-		return repo.save(prenotazione);
+	public String creaPrenotazione(Prenotazione prenotazione) {
+		Evento E = eventoService.getEvento(prenotazione.getEvento().getId());
+		if(E.getPostidisponibili() > prenotazione.getNumeropersone()) {
+		E.setPostidisponibili(E.getPostidisponibili() - prenotazione.getNumeropersone());
+		eventoService.updateEvento(E);
+	    repo.save(prenotazione);
+	    return "Prenotazione effettuta";
+		} 
+		return "Non ci sono abbastanza posti disponibili";		
 	}
 
 	

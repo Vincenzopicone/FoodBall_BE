@@ -32,8 +32,8 @@ public class TestController {
 	}
 
 
-	@GetMapping("/restaurant")
-	@PreAuthorize("hasRole('RESTAURANT')")
+	@GetMapping("/admin")
+	@PreAuthorize("hasRole('ADMIN')")
 	public String restaurantAccess() {
 		return "Restaurant Board.";
 	}

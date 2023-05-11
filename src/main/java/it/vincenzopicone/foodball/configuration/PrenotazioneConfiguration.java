@@ -32,7 +32,7 @@ public class PrenotazioneConfiguration {
 				.evento(E)
 				.dataevento(E.getData())
 				.dataprenotazione(LocalDate.of(2023, 5, 1))
-				.numeropersone(20)
+				.numeropersone(fake.number().numberBetween(3, 6))
 				.build();
 	}
 

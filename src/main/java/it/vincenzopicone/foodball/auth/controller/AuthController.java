@@ -5,7 +5,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,14 +22,14 @@ import it.vincenzopicone.foodball.auth.repository.RoleRepository;
 import it.vincenzopicone.foodball.auth.repository.UserRepository;
 import it.vincenzopicone.foodball.auth.service.AuthService;
 
-
+@CrossOrigin(origins =  "*", maxAge = 360000)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-	
+
 
     private AuthService authService;
-    private UserRepository repo;
+    @Autowired UserRepository repo;
 
     public AuthController(AuthService authService) {
         this.authService = authService;
@@ -37,12 +40,12 @@ public class AuthController {
     public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginDto loginDto){
            	
     	String token = authService.login(loginDto);
-//    	User U = repo.findByUsername(loginDto.getUsername());
+    	User U = repo.findByUsername(loginDto.getUsername()).get();
 
         JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
         jwtAuthResponse.setUsername(loginDto.getUsername());
         jwtAuthResponse.setAccessToken(token);
-//        jwtAuthResponse.setRoles(U.getRoles());
+        jwtAuthResponse.setRoles(U.getRoles());
 
         return ResponseEntity.ok(jwtAuthResponse);
     }
@@ -53,4 +56,6 @@ public class AuthController {
         String response = authService.register(registerDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+    
+
 }
