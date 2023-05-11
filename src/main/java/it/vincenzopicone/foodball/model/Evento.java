@@ -3,6 +3,7 @@ package it.vincenzopicone.foodball.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -48,8 +49,8 @@ public class Evento {
 	@ManyToOne
 	@JsonIgnoreProperties({"evento"})
 	private Partita partita;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JsonIgnoreProperties({"evento"})
+	@OneToMany(mappedBy ="evento", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"evento" , "utente"})
 	private List<Prenotazione> prenotazione;
 
 }

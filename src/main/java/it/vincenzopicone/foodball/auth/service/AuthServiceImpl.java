@@ -20,8 +20,7 @@ import it.vincenzopicone.foodball.auth.payload.RegisterDto;
 import it.vincenzopicone.foodball.auth.repository.RoleRepository;
 import it.vincenzopicone.foodball.auth.repository.UserRepository;
 import it.vincenzopicone.foodball.auth.security.JwtTokenProvider;
-import it.vincenzopicone.foodball.model.Locale;
-import it.vincenzopicone.foodball.service.LocaleService;
+
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -31,7 +30,6 @@ public class AuthServiceImpl implements AuthService {
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
     private JwtTokenProvider jwtTokenProvider;
-    private LocaleService localeService;
 
 
     public AuthServiceImpl(AuthenticationManager authenticationManager,
@@ -103,7 +101,7 @@ public class AuthServiceImpl implements AuthService {
     }
     
     public ERole getRole(String role) {
-    	if(role.equals("ROLE_USER")) return ERole.ROLE_USER;
+    	if(role.equals("ROLE_ADMIN")) return ERole.ROLE_ADMIN;
     	else return ERole.ROLE_USER;
     }
     

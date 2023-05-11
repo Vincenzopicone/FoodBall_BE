@@ -1,5 +1,8 @@
 package it.vincenzopicone.foodball.auth.controller;
 
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,17 +11,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.vincenzopicone.foodball.auth.entity.User;
 import it.vincenzopicone.foodball.auth.payload.JWTAuthResponse;
 import it.vincenzopicone.foodball.auth.payload.LoginDto;
 import it.vincenzopicone.foodball.auth.payload.RegisterDto;
+import it.vincenzopicone.foodball.auth.repository.RoleRepository;
+import it.vincenzopicone.foodball.auth.repository.UserRepository;
 import it.vincenzopicone.foodball.auth.service.AuthService;
 
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+	
 
     private AuthService authService;
+    private UserRepository repo;
 
     public AuthController(AuthService authService) {
         this.authService = authService;
@@ -29,10 +37,12 @@ public class AuthController {
     public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginDto loginDto){
            	
     	String token = authService.login(loginDto);
+//    	User U = repo.findByUsername(loginDto.getUsername());
 
         JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
         jwtAuthResponse.setUsername(loginDto.getUsername());
         jwtAuthResponse.setAccessToken(token);
+//        jwtAuthResponse.setRoles(U.getRoles());
 
         return ResponseEntity.ok(jwtAuthResponse);
     }

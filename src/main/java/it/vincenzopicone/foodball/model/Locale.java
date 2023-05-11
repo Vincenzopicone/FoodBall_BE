@@ -48,9 +48,9 @@ public class Locale {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable= false)
 	private TipoLocale tipolocale;
-	@OneToMany(mappedBy = "locale", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JsonIgnoreProperties({"locale"})
-	private List<Prenotazione> prenotazioni;
+//	@OneToMany(mappedBy = "locale", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JsonIgnoreProperties({"evento"})
+//	private List<Prenotazione> prenotazioni;
 	@OneToMany(mappedBy = "locale", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({"locale"})
 	private List<Evento> evento;;

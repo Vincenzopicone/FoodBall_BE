@@ -14,9 +14,11 @@ import org.springframework.stereotype.Component;
 
 import it.vincenzopicone.foodball.auth.entity.ERole;
 import it.vincenzopicone.foodball.auth.entity.Role;
+import it.vincenzopicone.foodball.auth.payload.RegisterDto;
 import it.vincenzopicone.foodball.auth.repository.RoleRepository;
 import it.vincenzopicone.foodball.auth.repository.UserRepository;
 import it.vincenzopicone.foodball.auth.service.AuthService;
+import it.vincenzopicone.foodball.auth.service.AuthServiceImpl;
 import it.vincenzopicone.foodball.configuration.EventoConfiguration;
 import it.vincenzopicone.foodball.configuration.PrenotazioneConfiguration;
 import it.vincenzopicone.foodball.model.Evento;
@@ -42,6 +44,7 @@ public class AuthRunner implements ApplicationRunner {
 	@Autowired PrenotazioneService prenotazioneService;
 	
 	private Set<Role> userRole;
+	private Set<Role> adminRole;
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -50,23 +53,23 @@ public class AuthRunner implements ApplicationRunner {
 		//setPartitaRandom();
 		//setLocaleRandom();
 		//setEventiRandom();
-		setPrenotazioniRandom();
+		//setPrenotazioniRandom();
 		
 		
 	}
 	
 	private void setRoleDefault() {
-//		Role restaurant = new Role();
-//		restaurant.setRoleName(ERole.ROLE_RESTAURANT);
-//		roleRepository.save(restaurant);
+		Role admin = new Role();
+		admin.setRoleName(ERole.ROLE_ADMIN);
+		roleRepository.save(admin);
 		
 		Role user = new Role();
 		user.setRoleName(ERole.ROLE_USER);
 		roleRepository.save(user);
 		
 		
-//		restaurantRole = new HashSet<Role>();
-//		restaurantRole.add(restaurant);
+		adminRole = new HashSet<Role>();
+		adminRole.add(admin);
 		
 		
 		userRole = new HashSet<Role>();
@@ -97,5 +100,5 @@ public class AuthRunner implements ApplicationRunner {
 			prenotazioneService.creaPrenotazione(P);
 			}
 	}
-
+	
 }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import it.vincenzopicone.foodball.auth.entity.User;
@@ -42,6 +43,6 @@ public class Partita {
 	private String squadra1;
 	private String squadra2;
 	@OneToMany(mappedBy = "partita", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JsonIgnoreProperties({"partita"})
+	@JsonIgnore
 	private List<Evento> evento;
 }

@@ -30,9 +30,9 @@ public class PrenotazioneConfiguration {
 		return Prenotazione.builder()
 				.utente(U)
 				.evento(E)
-				.locale(E.getLocale())
 				.dataevento(E.getData())
 				.dataprenotazione(LocalDate.of(2023, 5, 1))
+				.numeropersone(20)
 				.build();
 	}
 

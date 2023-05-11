@@ -3,6 +3,7 @@ package it.vincenzopicone.foodball.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import it.vincenzopicone.foodball.auth.entity.User;
@@ -37,15 +38,17 @@ public class Prenotazione {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	@ManyToOne
-	@JsonIgnoreProperties({"utente"})
+	@JsonIgnoreProperties({"prenotazioni", "roles", "username", "password"})
 	private User utente;
-	@ManyToOne
-	@JsonIgnoreProperties({"prenotazione"})
-	private Locale locale;
+//	@ManyToOne
+//	@JsonIgnore
+//	private Locale locale;
 	@Column(nullable = false)
 	private LocalDate dataevento;
 	@Column(nullable = false)
 	private LocalDate dataprenotazione;
+	@Column(nullable = false)
+	private Integer numeropersone;
 	@ManyToOne
 	@JsonIgnoreProperties({"prenotazione"})
 	private Evento evento;

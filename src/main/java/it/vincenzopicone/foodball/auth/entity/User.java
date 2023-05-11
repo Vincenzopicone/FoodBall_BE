@@ -41,7 +41,7 @@ public class User {
     private String password;
     
     @OneToMany(mappedBy = "utente", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JsonIgnoreProperties({"user"})
+	@JsonIgnoreProperties({"utente"})
 	private List<Prenotazione> prenotazioni;
     
     
