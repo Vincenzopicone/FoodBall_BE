@@ -60,10 +60,10 @@ public class PrenotazioneController {
 	public ResponseEntity<Page<Prenotazione>> getAllPage(Pageable pag) {
 		return new ResponseEntity<Page<Prenotazione>>(prenotazioneService.getAllPrenotazionePageable(pag), HttpStatus.OK);
 	}
-	@PostMapping("/prenota")
+	@PostMapping("/prenotaora")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<?> creaPrenotazione(@RequestBody Prenotazione prenotazione) {
-		return new ResponseEntity<>(prenotazioneService.creaPrenotazione(prenotazione), HttpStatus.CREATED);
+	public ResponseEntity<Prenotazione> creaPrenotazione(@RequestBody Prenotazione prenotazione) {
+		return new ResponseEntity<Prenotazione>(prenotazioneService.creaPrenotazione(prenotazione), HttpStatus.CREATED);
 	}
 	
 

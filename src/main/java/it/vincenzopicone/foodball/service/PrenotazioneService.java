@@ -10,31 +10,44 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import ch.qos.logback.classic.Logger;
 import it.vincenzopicone.foodball.auth.entity.User;
+import it.vincenzopicone.foodball.auth.repository.UserRepository;
 import it.vincenzopicone.foodball.model.Evento;
 import it.vincenzopicone.foodball.model.Locale;
 import it.vincenzopicone.foodball.model.Partita;
 import it.vincenzopicone.foodball.model.Prenotazione;
+import it.vincenzopicone.foodball.repository.EventoRepository;
 import it.vincenzopicone.foodball.repository.PrenotazioneRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class PrenotazioneService {
 	
 	@Autowired PrenotazioneRepository repo;
+	@Autowired EventoRepository eventoRepo;
 	@Autowired EventoService eventoService;
+	@Autowired UserRepository utenteRepo;
 	
 	
-	public String creaPrenotazione(Prenotazione prenotazione) {
-		Evento E = eventoService.getEvento(prenotazione.getEvento().getId());
+	public Prenotazione creaPrenotazione(Prenotazione prenotazione) {
+		Evento E = eventoRepo.findById(prenotazione.getEvento().getId()).get();
+		User U = utenteRepo.findByUsername(prenotazione.getUtente().getUsername()).get();
+		Prenotazione P = new Prenotazione();
 		if(E.getPostidisponibili() > prenotazione.getNumeropersone()) {
 		E.setPostidisponibili(E.getPostidisponibili() - prenotazione.getNumeropersone());
 		eventoService.updateEvento(E);
-	    repo.save(prenotazione);
-	    return "Prenotazione effettuta";
+		P.setDataprenotazione(LocalDate.now());
+		P.setDataevento(E.getData());
+		P.setUtente(U);
+		P.setNumeropersone(prenotazione.getNumeropersone());
+		P.setEvento(E);
+		repo.save(prenotazione);
 		} 
-		return "Non ci sono abbastanza posti disponibili";		
+	    return P;
 	}
 
 	

@@ -50,7 +50,7 @@ public class AuthRunner implements ApplicationRunner {
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		System.out.println("Run...");
+		System.out.println("Run...FoooooooooodBaaaaaaaalll");
 		//setRoleDefault();
 		//setPartitaRandom();
 		//setLocaleRandom();
