@@ -16,7 +16,7 @@ public interface LocaleRepository extends CrudRepository<Locale, Long>, PagingAn
 	public boolean existsByCitta(String citta);
 
 	public List<Locale> findByNomelocale(String nomelocale);
-	public List<Partita> findByCitta(String citta);
+	public List<Locale> findByCitta(String citta);
 	@Query(value="SELECT l FROM Locale l ORDER BY RANDOM() LIMIT 1")
 	Locale findByLocaleRandom();
 	

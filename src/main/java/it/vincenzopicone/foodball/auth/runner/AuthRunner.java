@@ -23,6 +23,7 @@ import it.vincenzopicone.foodball.configuration.EventoConfiguration;
 import it.vincenzopicone.foodball.configuration.PrenotazioneConfiguration;
 import it.vincenzopicone.foodball.model.Evento;
 import it.vincenzopicone.foodball.model.Prenotazione;
+import it.vincenzopicone.foodball.repository.EventoRepository;
 import it.vincenzopicone.foodball.service.EventoService;
 import it.vincenzopicone.foodball.service.LocaleService;
 import it.vincenzopicone.foodball.service.PartitaService;
@@ -42,6 +43,7 @@ public class AuthRunner implements ApplicationRunner {
 	@Autowired EventoConfiguration eventoConfiguration;
 	@Autowired PrenotazioneConfiguration prenotazioneConfiguration;
 	@Autowired PrenotazioneService prenotazioneService;
+	@Autowired EventoRepository eventoRepository;
 	
 	private Set<Role> userRole;
 	private Set<Role> adminRole;

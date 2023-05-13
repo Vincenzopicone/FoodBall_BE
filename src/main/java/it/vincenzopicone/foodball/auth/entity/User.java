@@ -39,7 +39,8 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
-    
+//    @OneToOne
+//    private Info info;
     @OneToMany(mappedBy = "utente", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({"utente"})
 	private List<Prenotazione> prenotazioni;

@@ -2,6 +2,7 @@ package it.vincenzopicone.foodball.auth.payload;
 
 import java.util.Set;
 
+import it.vincenzopicone.foodball.auth.entity.Info;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +20,6 @@ public class RegisterDto {
     private String email;
     private String password;
     private Set<String> roles;
+//    private Info info;
 
 }

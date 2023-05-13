@@ -14,7 +14,8 @@ public interface EventoRepository extends CrudRepository<Evento, Long>, PagingAn
 
 	public boolean existsByData(LocalDate data);
 	public List <Evento> findByData(LocalDate data);
-	
+	List<Evento> findByCitta(String citta);
+	List<Evento> findByCittaAndData(String citta, LocalDate data);
 	@Query(value="SELECT e FROM Evento e ORDER BY RANDOM() LIMIT 1")
 	Evento findByEventoRandom();
 }

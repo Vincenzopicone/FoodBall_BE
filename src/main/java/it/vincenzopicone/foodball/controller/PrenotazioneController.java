@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import it.vincenzopicone.foodball.model.Partita;
 import it.vincenzopicone.foodball.model.Prenotazione;
@@ -39,10 +41,10 @@ public class PrenotazioneController {
 		return new ResponseEntity<>(prenotazioneService.getPrenotazione(id), HttpStatus.OK);
 	}
 	@PostMapping("/crea")
-//	@PreAuthorize("isAuthenticated()")
-//	public ResponseEntity<?> newPrenotazione(Prenotazione prenotazione) {
-//		return new ResponseEntity<>(prenotazioneService.creaPrenotazione(prenotazione.getLocale(), prenotazione.getEvento(), prenotazione.getUtente(), prenotazione.getData()), HttpStatus.OK);
-//	}
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> newPrenotazione(Prenotazione prenotazione) {
+		return new ResponseEntity<>(prenotazioneService.creaPrenotazione(prenotazione), HttpStatus.OK);
+	}
 	@GetMapping("/dataprenotazione/{data}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getPrenotazioniPerData(@PathVariable LocalDate data){
@@ -58,5 +60,11 @@ public class PrenotazioneController {
 	public ResponseEntity<Page<Prenotazione>> getAllPage(Pageable pag) {
 		return new ResponseEntity<Page<Prenotazione>>(prenotazioneService.getAllPrenotazionePageable(pag), HttpStatus.OK);
 	}
+	@PostMapping("/prenota")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> creaPrenotazione(@RequestBody Prenotazione prenotazione) {
+		return new ResponseEntity<>(prenotazioneService.creaPrenotazione(prenotazione), HttpStatus.CREATED);
+	}
+	
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.vincenzopicone.foodball.model.Evento;
 import it.vincenzopicone.foodball.model.Partita;
+import it.vincenzopicone.foodball.repository.EventoRepository;
 import it.vincenzopicone.foodball.service.EventoService;
 import it.vincenzopicone.foodball.service.PartitaService;
 
@@ -26,6 +27,7 @@ import it.vincenzopicone.foodball.service.PartitaService;
 public class EventoController {
 	
 	@Autowired EventoService eventoService;
+	@Autowired EventoRepository repo;
 	
 	@GetMapping
 	@PreAuthorize("isAuthenticated()")
@@ -40,13 +42,23 @@ public class EventoController {
 	
 	@GetMapping("/data/{data}")
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<?> getclientiPerNumero(@PathVariable LocalDate data){
+	public ResponseEntity<?> getEventoPerData(@PathVariable LocalDate data){
 		return new ResponseEntity<List<Evento>>(eventoService.getEventoPerData(data), HttpStatus.OK);
+	}
+	@GetMapping("/citta/{citta}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getEventoPerCitta(@PathVariable String citta){
+		return new ResponseEntity<List<Evento>>(repo.findByCitta(citta), HttpStatus.OK);
 	}
 	@GetMapping("/pageable")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<Page<Evento>> getAllPage(Pageable pag) {
 		return new ResponseEntity<Page<Evento>>(eventoService.getAllEventoPageable(pag), HttpStatus.OK);
+	}
+	@GetMapping("/citta/{citta}/data/{data}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getEventoPerCittaData(@PathVariable String citta, @PathVariable LocalDate data){
+		return new ResponseEntity<List<Evento>>(repo.findByCittaAndData(citta, data), HttpStatus.OK);
 	}
 
 }
