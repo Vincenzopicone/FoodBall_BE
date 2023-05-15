@@ -42,7 +42,7 @@ public class Partita {
 	private LocalDate data;
 	private String squadra1;
 	private String squadra2;
-	@OneToMany(mappedBy = "partita", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "partita", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Evento> evento;
 }

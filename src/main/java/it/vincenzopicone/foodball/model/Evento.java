@@ -49,7 +49,7 @@ public class Evento {
 	@ManyToOne
 	@JsonIgnoreProperties({"evento"})
 	private Partita partita;
-	@OneToMany(mappedBy ="evento", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy ="evento", cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({ "evento" , "utente"})
 	private List<Prenotazione> prenotazione;
 

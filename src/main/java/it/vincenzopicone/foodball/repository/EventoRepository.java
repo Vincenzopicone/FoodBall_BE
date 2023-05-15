@@ -2,6 +2,7 @@ package it.vincenzopicone.foodball.repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,6 +14,7 @@ import it.vincenzopicone.foodball.model.Evento;
 public interface EventoRepository extends CrudRepository<Evento, Long>, PagingAndSortingRepository<Evento, Long> {
 
 	public boolean existsByData(LocalDate data);
+	Optional <Evento> findById(Long id);
 	public List <Evento> findByData(LocalDate data);
 	List<Evento> findByCitta(String citta);
 	List<Evento> findByCittaAndData(String citta, LocalDate data);

@@ -41,7 +41,7 @@ public class User {
     private String password;
 //    @OneToOne
 //    private Info info;
-    @OneToMany(mappedBy = "utente", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "utente", cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"utente"})
 	private List<Prenotazione> prenotazioni;
     

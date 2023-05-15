@@ -34,20 +34,18 @@ public class PrenotazioneService {
 	
 	
 	public Prenotazione creaPrenotazione(Prenotazione prenotazione) {
-		Evento E = eventoRepo.findById(prenotazione.getEvento().getId()).get();
-		User U = utenteRepo.findByUsername(prenotazione.getUtente().getUsername()).get();
-		Prenotazione P = new Prenotazione();
-		if(E.getPostidisponibili() > prenotazione.getNumeropersone()) {
-		E.setPostidisponibili(E.getPostidisponibili() - prenotazione.getNumeropersone());
-		eventoService.updateEvento(E);
-		P.setDataprenotazione(LocalDate.now());
-		P.setDataevento(E.getData());
-		P.setUtente(U);
-		P.setNumeropersone(prenotazione.getNumeropersone());
-		P.setEvento(E);
-		repo.save(prenotazione);
-		} 
-	    return P;
+//		
+//		Prenotazione P = new Prenotazione();
+////		if(E.getPostidisponibili() > prenotazione.getNumeropersone()) {
+//		E.setPostidisponibili(E.getPostidisponibili() - prenotazione.getNumeropersone());
+//		eventoService.updateEvento(E);
+//		P.setDataprenotazione(LocalDate.now());
+//		P.setDataevento(E.getData());
+//		P.setUtente(U);
+//		P.setNumeropersone(prenotazione.getNumeropersone());
+//		P.setEvento(E);
+		return repo.save(prenotazione);
+//		} 
 	}
 
 	
@@ -70,19 +68,25 @@ public class PrenotazioneService {
 		if(!repo.existsByDataprenotazione(dataInserimento)) {
 			throw new EntityNotFoundException("Non esistono prenotazioni con la data indicata!");
 		}
+
 		return repo.findByDataprenotazione(dataInserimento);
 	}
 	public List <Prenotazione> getPrenotazionePerDataevento(LocalDate dataInserimento) {
 		if(!repo.existsByDataevento(dataInserimento)) {
 			throw new EntityNotFoundException("Non esistono prenotazioni con la data indicata!");
 		}
+		
 		return repo.findByDataevento(dataInserimento);
 	}
 
 	public String removePrenotazione(Long id) {
 		if(!repo.existsById(id)) {
 			throw new EntityExistsException("La prenotazione non esiste!");
-		}
+		} 
+		Prenotazione P = repo.findById(id).get();
+		Evento E = eventoRepo.findById(P.getEvento().getId()).get();
+		E.setPostidisponibili(E.getPostidisponibili() + P.getNumeropersone());
+		eventoService.updateEvento(E);
 		repo.deleteById(id);
 		return "Prenotazione cancellata!";
 	}
@@ -90,6 +94,7 @@ public class PrenotazioneService {
 		if(!repo.existsById(prenotazione.getId())) {
 			throw new EntityExistsException("La prenotazione non esiste!");
 		}
+		
 		repo.save(prenotazione);
 		return prenotazione;
 	}

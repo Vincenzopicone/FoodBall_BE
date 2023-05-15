@@ -37,7 +37,7 @@ public class Prenotazione {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"prenotazioni", "roles", "username", "password"})
 	private User utente;
 //	@ManyToOne
@@ -48,8 +48,8 @@ public class Prenotazione {
 	@Column(nullable = false)
 	private LocalDate dataprenotazione;
 	@Column(nullable = false)
-	private Integer numeropersone;
-	@ManyToOne
+	private int numeropersone;
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"prenotazione"})
 	private Evento evento;
 

@@ -24,7 +24,6 @@ import it.vincenzopicone.foodball.auth.repository.RoleRepository;
 import it.vincenzopicone.foodball.auth.repository.UserRepository;
 import it.vincenzopicone.foodball.auth.security.JwtTokenProvider;
 import it.vincenzopicone.foodball.model.TipoLocale;
-import it.vincenzopicone.foodball.service.InfoService;
 
 
 @Service

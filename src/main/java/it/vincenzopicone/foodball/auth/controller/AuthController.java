@@ -60,5 +60,11 @@ public class AuthController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
     
+    @GetMapping("/profilo/{username}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> viewProfile(@PathVariable String username) {
+    	return new ResponseEntity<>(repo.findByUsername(username), HttpStatus.OK);
+    }
+    
 
 }
