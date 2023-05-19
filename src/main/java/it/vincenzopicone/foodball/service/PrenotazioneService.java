@@ -34,18 +34,7 @@ public class PrenotazioneService {
 	
 	
 	public Prenotazione creaPrenotazione(Prenotazione prenotazione) {
-//		
-//		Prenotazione P = new Prenotazione();
-////		if(E.getPostidisponibili() > prenotazione.getNumeropersone()) {
-//		E.setPostidisponibili(E.getPostidisponibili() - prenotazione.getNumeropersone());
-//		eventoService.updateEvento(E);
-//		P.setDataprenotazione(LocalDate.now());
-//		P.setDataevento(E.getData());
-//		P.setUtente(U);
-//		P.setNumeropersone(prenotazione.getNumeropersone());
-//		P.setEvento(E);
 		return repo.save(prenotazione);
-//		} 
 	}
 
 	
@@ -54,7 +43,7 @@ public class PrenotazioneService {
 	}
 	public Prenotazione getPrenotazione(Long id) {
 		if(!repo.existsById(id)) {
-			throw new EntityNotFoundException("La Prenotazione non esiste!");
+			throw new EntityNotFoundException("La prenotazione non esiste!");
 		}
 		return repo.findById(id).get();
 	}
@@ -88,6 +77,7 @@ public class PrenotazioneService {
 		E.setPostidisponibili(E.getPostidisponibili() + P.getNumeropersone());
 		eventoService.updateEvento(E);
 		repo.deleteById(id);
+		
 		return "Prenotazione cancellata!";
 	}
 	public Prenotazione updatePrenotazione(Prenotazione prenotazione) {

@@ -11,10 +11,16 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.vincenzopicone.foodball.auth.entity.User;
+import it.vincenzopicone.foodball.auth.repository.UserRepository;
 import it.vincenzopicone.foodball.model.Locale;
+import it.vincenzopicone.foodball.model.TipoLocale;
+import it.vincenzopicone.foodball.payload.CreaNuovoLocaleDto;
 import it.vincenzopicone.foodball.service.LocaleService;
 
 @CrossOrigin(origins =  "*", maxAge = 360000)
@@ -23,6 +29,8 @@ import it.vincenzopicone.foodball.service.LocaleService;
 public class LocaleController {
 	
 	@Autowired LocaleService localeService;
+	@Autowired UserRepository userRepo;
+	
 	
 	@GetMapping
 	@PreAuthorize("isAuthenticated()")
@@ -45,5 +53,7 @@ public class LocaleController {
 	public ResponseEntity<?> getLocalePerNomeParte(@PathVariable("nome") String nome){
 		return new ResponseEntity<>(localeService.getAllLocaleByName(nome), HttpStatus.OK);
 	}
+	
+
 
 }

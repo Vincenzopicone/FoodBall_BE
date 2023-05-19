@@ -11,7 +11,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import it.vincenzopicone.foodball.model.Evento;
+import it.vincenzopicone.foodball.model.Locale;
+import it.vincenzopicone.foodball.model.Partita;
+import it.vincenzopicone.foodball.payload.CreaNuovoEventoDto;
 import it.vincenzopicone.foodball.repository.EventoRepository;
+import it.vincenzopicone.foodball.repository.LocaleRepository;
+import it.vincenzopicone.foodball.repository.PartitaRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -19,12 +24,24 @@ import jakarta.persistence.EntityNotFoundException;
 public class EventoService {
 	
 	@Autowired EventoRepository repo;
+	@Autowired PartitaRepository partitaRepo;
+	@Autowired LocaleRepository localeRepo;
 
 	
 	public Evento creaEventoRandom(Evento evento) {
 		return repo.save(evento);
 	}
-	
+	public Evento creaEvento(CreaNuovoEventoDto newEvento) {
+		Partita P = partitaRepo.findById(newEvento.getIdPartita()).get();
+		Locale L = localeRepo.findById(newEvento.getIdLocale()).get();
+		Evento E = new Evento();
+		E.setLocale(L);
+		E.setPartita(P);
+		E.setPostidisponibili(newEvento.getPostiDisponibili());
+		E.setCitta(L.getCitta());
+		E.setData(P.getData());
+		return repo.save(E);
+	}
 	public List<Evento> getAllEvento() {
 		return (List<Evento>) repo.findAll();
 	}

@@ -14,6 +14,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import it.vincenzopicone.foodball.model.Locale;
 import it.vincenzopicone.foodball.model.Prenotazione;
 
 
@@ -39,8 +40,16 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
-//    @OneToOne
-//    private Info info;
+    private String indirizzo;
+    private String citta;
+    private String numerotelefono;
+    
+    @OneToOne
+    @JoinColumn(name = "locale_id")
+    @JsonIgnoreProperties({"user"})
+    private Locale locale;
+    
+    
     @OneToMany(mappedBy = "utente", cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"utente"})
 	private List<Prenotazione> prenotazioni;

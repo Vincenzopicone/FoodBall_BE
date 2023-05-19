@@ -13,14 +13,15 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterDto {
-    private String name;
-    private String username;
-    private String email;
-    private String password;
-    private String indirizzo;
-    private String citta;
-    private String numerotelefono;
-    private Set<String> roles;
+public class ModifyUserDto {
+	
+	private String name;
+	private String username;
+	private String email;
+//	private String password;
+	private String indirizzo;
+	private String citta;
+	private String numerotelefono;
+	
 
 }

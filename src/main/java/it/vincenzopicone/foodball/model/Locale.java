@@ -53,7 +53,11 @@ public class Locale {
 //	private List<Prenotazione> prenotazioni;
 	@OneToMany(mappedBy = "locale", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({"locale"})
-	private List<Evento> evento;;
+	private List<Evento> evento;
+	
+	@OneToOne(mappedBy = "locale")
+	@JsonIgnoreProperties({"prenotazioni", "password", "indirizzo", "citta", "roles", "locale", "user"})
+	public User user;
 	
 	
 

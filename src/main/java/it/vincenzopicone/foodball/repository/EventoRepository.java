@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -20,4 +22,5 @@ public interface EventoRepository extends CrudRepository<Evento, Long>, PagingAn
 	List<Evento> findByCittaAndData(String citta, LocalDate data);
 	@Query(value="SELECT e FROM Evento e ORDER BY RANDOM() LIMIT 1")
 	Evento findByEventoRandom();
+	Page<Evento> findByCittaAndDataAfterOrderByCittaAscDataAsc(String city, LocalDate date, Pageable pageable);
 }

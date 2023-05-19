@@ -90,11 +90,6 @@ public class PrenotazioneController {
 	public ResponseEntity<Page<Prenotazione>> getAllPage(Pageable pag) {
 		return new ResponseEntity<Page<Prenotazione>>(prenotazioneService.getAllPrenotazionePageable(pag), HttpStatus.OK);
 	}
-//	@PostMapping("/prenotaora")
-//	@PreAuthorize("isAuthenticated()")
-//	public ResponseEntity<?> creaPrenotazione(@RequestBody Prenotazione prenotazione) {
-//		return new ResponseEntity<Prenotazione>(prenotazioneService.creaPrenotazione(prenotazione), HttpStatus.CREATED);
-//	}
 	
 	@DeleteMapping("/rimuovi/{id}")
 	@PreAuthorize("isAuthenticated()")

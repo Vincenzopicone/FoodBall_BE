@@ -13,13 +13,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import it.vincenzopicone.foodball.auth.entity.ERole;
-import it.vincenzopicone.foodball.auth.entity.Info;
 import it.vincenzopicone.foodball.auth.entity.Role;
 import it.vincenzopicone.foodball.auth.entity.User;
 import it.vincenzopicone.foodball.auth.exception.MyAPIException;
 import it.vincenzopicone.foodball.auth.payload.LoginDto;
 import it.vincenzopicone.foodball.auth.payload.RegisterDto;
-import it.vincenzopicone.foodball.auth.repository.InfoRepository;
 import it.vincenzopicone.foodball.auth.repository.RoleRepository;
 import it.vincenzopicone.foodball.auth.repository.UserRepository;
 import it.vincenzopicone.foodball.auth.security.JwtTokenProvider;
@@ -34,7 +32,6 @@ public class AuthServiceImpl implements AuthService {
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
     private JwtTokenProvider jwtTokenProvider;
-    @Autowired InfoRepository infoRepo;
 
 
     public AuthServiceImpl(AuthenticationManager authenticationManager,
@@ -89,11 +86,13 @@ public class AuthServiceImpl implements AuthService {
      
 
         User user = new User();
-        Info info = new Info();
         user.setName(registerDto.getName());
         user.setUsername(registerDto.getUsername());
         user.setEmail(registerDto.getEmail());
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
+        user.setIndirizzo(registerDto.getIndirizzo());
+        user.setCitta(registerDto.getCitta());
+        user.setNumerotelefono(registerDto.getNumerotelefono());
         Set<Role> roles = new HashSet<>();
         
 //        if(registerDto.getInfo() != null) {
@@ -136,8 +135,7 @@ public class AuthServiceImpl implements AuthService {
 //        user.setInfo(info);
 
         
-        
-        // Per registrare tutti come USER di Default commentare IF
+      
         if(registerDto.getRoles() != null) {
 	        registerDto.getRoles().forEach(role -> {
 	        	Role userRole = roleRepository.findByRoleName(getRole(role)).get();
@@ -154,7 +152,7 @@ public class AuthServiceImpl implements AuthService {
         
         userRepository.save(user);
 
-        return "User registered successfully!.";
+        return "Utente registrato correttamente!";
     }
     
     public ERole getRole(String role) {

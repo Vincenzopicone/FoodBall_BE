@@ -20,8 +20,10 @@ public interface PrenotazioneRepository
 	public boolean existsByDataprenotazione(LocalDate data);	
 	public List <Prenotazione> findByDataprenotazione(LocalDate data);
 	
-	 @Query("SELECT COUNT(p) > 0 FROM Prenotazione p WHERE p.dataevento = :data AND p.evento = :evento AND p.utente = :utente")
-	 boolean existsByDataeventoAndEventoAndUtente(@Param("data") LocalDate data, @Param("evento") Long evento, @Param("utente") Long utente);
+
+	
+//	 @Query("SELECT COUNT(p) > 0 FROM Prenotazione p WHERE p.dataevento = :data AND p.evento = :evento AND p.utente = :utente")
+//	 boolean existsByDataeventoAndEventoAndUtente(@Param("data") LocalDate data, @Param("evento") Long evento, @Param("utente") Long utente);
 	
 //	@Modifying
 //	@Query(value="DELETE FROM Prenotazione p WHERE p.id = :id")

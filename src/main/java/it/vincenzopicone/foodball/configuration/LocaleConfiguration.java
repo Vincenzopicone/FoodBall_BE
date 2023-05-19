@@ -20,7 +20,7 @@ public class LocaleConfiguration {
 		Faker fake = new Faker();
 		return Locale.builder()
 				.nomelocale("Locale " + i)
-				.citta("Torino")
+				.citta("Roma")
 				.indirizzo(fake.address().streetAddress()+ " , " +fake.address().streetAddressNumber())
 				.tipolocale(TipoLocale.RISTORANTE)
 				.build();

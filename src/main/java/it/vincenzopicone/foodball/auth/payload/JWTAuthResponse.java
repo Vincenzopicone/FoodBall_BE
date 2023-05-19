@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import it.vincenzopicone.foodball.auth.entity.Role;
+import it.vincenzopicone.foodball.model.Locale;
 import it.vincenzopicone.foodball.model.Prenotazione;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,4 +24,5 @@ public class JWTAuthResponse {
     private String email;
     private Set<Role> roles; 
     private List<Prenotazione> prenotazione;
+    private Locale locale;
 }
