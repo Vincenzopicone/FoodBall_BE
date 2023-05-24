@@ -1,6 +1,7 @@
 package it.vincenzopicone.foodball.model;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -40,9 +41,9 @@ public class Prenotazione {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"prenotazioni", "roles", "username", "password"})
 	private User utente;
-//	@ManyToOne
-//	@JsonIgnore
-//	private Locale locale;
+
+	private LocalTime orario;
+	private String note;
 	@Column(nullable = false)
 	private LocalDate dataevento;
 	@Column(nullable = false)
@@ -52,5 +53,4 @@ public class Prenotazione {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"prenotazione"})
 	private Evento evento;
-
 }

@@ -69,6 +69,8 @@ public class PrenotazioneController {
 		P.setUtente(U);
 		P.setNumeropersone(prenotazione.getNumeropersone());
 		P.setEvento(E);
+		P.setOrario(prenotazione.getOrario());
+		P.setNote(prenotazione.getNote());
 		return new ResponseEntity<Prenotazione>(prenotazioneService.creaPrenotazione(P), HttpStatus.OK);
 		} else {
 		

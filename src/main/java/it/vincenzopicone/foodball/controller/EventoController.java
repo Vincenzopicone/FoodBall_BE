@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.vincenzopicone.foodball.model.Evento;
 import it.vincenzopicone.foodball.model.Partita;
+import it.vincenzopicone.foodball.model.TipoLocale;
 import it.vincenzopicone.foodball.payload.CreaNuovoEventoDto;
 import it.vincenzopicone.foodball.repository.EventoRepository;
 import it.vincenzopicone.foodball.service.EventoService;
@@ -54,6 +56,25 @@ public class EventoController {
 	public ResponseEntity<?> getEventoPerCitta(@PathVariable String citta){
 		return new ResponseEntity<List<Evento>>(repo.findByCitta(citta), HttpStatus.OK);
 	}
+	@GetMapping("/citta/{citta}/tipolocale/{locale}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getEventoPerCittaTipoLocale(@PathVariable String citta, @PathVariable String locale){
+		TipoLocale tipolocale = null;
+		if (locale.equals("PIZZERIA")) {
+			tipolocale = TipoLocale.PIZZERIA;
+		} else if (locale.equals("PUB")) {
+			tipolocale = TipoLocale.PUB;
+		} else if (locale.equals("BURGER")) {
+			tipolocale = TipoLocale.BURGER;
+		} else tipolocale = TipoLocale.RISTORANTE;
+
+		return new ResponseEntity<List<Evento>>(repo.findByCittaAndTipolocale(citta, tipolocale), HttpStatus.OK);
+	}
+	@GetMapping("/nomelocale/{nome}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getEventoPerNomeLocale(@PathVariable String nome){
+		return new ResponseEntity<List<Evento>>(repo.findByNomelocale(nome), HttpStatus.OK);
+	}
 	@GetMapping("/pageable")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<Page<Evento>> getAllPage(Pageable pag) {
@@ -73,8 +94,14 @@ public class EventoController {
 	@PostMapping("/crea")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> newEvento (@RequestBody CreaNuovoEventoDto newEvento) {
-		return new ResponseEntity<Evento>(eventoService.creaEvento(newEvento), HttpStatus.OK);
+		return new ResponseEntity<Evento>(eventoService.creaEvento(newEvento), HttpStatus.CREATED);
 		
+	}
+	
+	@DeleteMapping("/rimuovi/{id}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> rimuoviEvento(@PathVariable Long id) {
+		return new ResponseEntity<>(eventoService.removeEvento(id), HttpStatus.OK);
 	}
 	
 

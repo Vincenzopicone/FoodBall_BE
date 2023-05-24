@@ -40,9 +40,10 @@ public class Partita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	private LocalDate data;
+	private LocalTime orario;
 	private String squadra1;
 	private String squadra2;
-	@OneToMany(mappedBy = "partita", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "partita", cascade = CascadeType.MERGE)
 	@JsonIgnore
 	private List<Evento> evento;
 }

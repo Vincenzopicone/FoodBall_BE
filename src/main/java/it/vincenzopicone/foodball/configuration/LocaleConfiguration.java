@@ -19,10 +19,10 @@ public class LocaleConfiguration {
 	public Locale localeRandom(Integer i) {
 		Faker fake = new Faker();
 		return Locale.builder()
-				.nomelocale("Locale " + i)
-				.citta("Roma")
+				.nomelocale("Pizzeria " + i)
+				.citta("Reggio Calabria")
 				.indirizzo(fake.address().streetAddress()+ " , " +fake.address().streetAddressNumber())
-				.tipolocale(TipoLocale.RISTORANTE)
+				.tipolocale(TipoLocale.PIZZERIA)
 				.build();
 	}
 

@@ -43,13 +43,13 @@ public class Evento {
 	private LocalDate data;
 	@Column(nullable= false)
 	private Integer postidisponibili;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"evento"})
 	private Locale locale;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"evento"})
 	private Partita partita;
-	@OneToMany(mappedBy ="evento", cascade = CascadeType.MERGE)
+	@OneToMany(mappedBy ="evento", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({ "evento" })
 	private List<Prenotazione> prenotazione;
 

@@ -26,7 +26,7 @@ public class PartitaController {
 	@Autowired PartitaService partitaService;
 	
 	@GetMapping
-	@PreAuthorize("isAuthenticated()")
+//	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getAll() {
 		return new ResponseEntity<List<Partita>>(partitaService.getAllPartite(), HttpStatus.OK);
 	}
@@ -42,7 +42,7 @@ public class PartitaController {
 		return new ResponseEntity<List<Partita>>(partitaService.getPartitaPerData(data), HttpStatus.OK);
 	}
 	@GetMapping("/pageable")
-	@PreAuthorize("isAuthenticated()")
+//	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<Page<Partita>> getAllPage(Pageable pag) {
 		return new ResponseEntity<Page<Partita>>(partitaService.getAllPartitaPageable(pag), HttpStatus.OK);
 	}

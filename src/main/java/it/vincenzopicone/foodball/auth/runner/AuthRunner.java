@@ -21,6 +21,9 @@ import it.vincenzopicone.foodball.auth.service.AuthService;
 import it.vincenzopicone.foodball.auth.service.AuthServiceImpl;
 import it.vincenzopicone.foodball.configuration.EventoConfiguration;
 import it.vincenzopicone.foodball.configuration.PrenotazioneConfiguration;
+import it.vincenzopicone.foodball.faketeam.Squadra;
+import it.vincenzopicone.foodball.faketeam.SquadraConfiguration;
+import it.vincenzopicone.foodball.faketeam.SquadraRepository;
 import it.vincenzopicone.foodball.model.Evento;
 import it.vincenzopicone.foodball.model.Prenotazione;
 import it.vincenzopicone.foodball.repository.EventoRepository;
@@ -44,6 +47,8 @@ public class AuthRunner implements ApplicationRunner {
 	@Autowired PrenotazioneConfiguration prenotazioneConfiguration;
 	@Autowired PrenotazioneService prenotazioneService;
 	@Autowired EventoRepository eventoRepository;
+	@Autowired SquadraConfiguration squadraConfiguration;
+	@Autowired SquadraRepository squadraRepository;
 	
 	private Set<Role> userRole;
 	private Set<Role> adminRole;
@@ -52,9 +57,11 @@ public class AuthRunner implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println("Run...FoooooooooodBaaaaaaaalll");
 		//setRoleDefault();
-		//setPartitaRandom();
+		//squadraConfiguration.addSquadra();
+		//setPartiteDefault();
+		//setPartitaRandom();//
 		//setLocaleRandom();
-		//setEventiRandom();
+		setEventiRandom();
 		//setPrenotazioniRandom();
 		
 		
@@ -83,6 +90,12 @@ public class AuthRunner implements ApplicationRunner {
 		partitaService.creaPartitaRandom(LocalDate.of(2023, 6, 1), i);
 		}
 	}
+	
+	public void setPartiteDefault() {
+		for(Long i = 0l; i < 30l; i++) {
+			partitaService.creaPartitaDefault(LocalDate.of(2023, 6, 1), i);
+			}		
+	}
 	public void setLocaleRandom() {
 		for(Integer i = 0; i < 30l; i++) {
 		localeService.creaLocaleRandom(i);
@@ -90,7 +103,7 @@ public class AuthRunner implements ApplicationRunner {
 	}
 	
 	public void setEventiRandom() {
-		for(Integer i = 0; i < 30l; i++) {
+		for(Integer i = 0; i < 300l; i++) {
 			Evento E = eventoConfiguration.eventoRandom();
 			eventoService.creaEventoRandom(E);
 			}

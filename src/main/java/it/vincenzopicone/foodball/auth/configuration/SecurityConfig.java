@@ -58,6 +58,9 @@ public class SecurityConfig {
         .authorizeHttpRequests((authorize) -> authorize
         		.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/partite").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/partite/pageable").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/locale/random").permitAll()
                 .anyRequest().authenticated())
         .exceptionHandling( exception -> exception
                 .authenticationEntryPoint(authenticationEntryPoint)

@@ -21,6 +21,7 @@ import it.vincenzopicone.foodball.auth.repository.UserRepository;
 import it.vincenzopicone.foodball.model.Locale;
 import it.vincenzopicone.foodball.model.TipoLocale;
 import it.vincenzopicone.foodball.payload.CreaNuovoLocaleDto;
+import it.vincenzopicone.foodball.repository.LocaleRepository;
 import it.vincenzopicone.foodball.service.LocaleService;
 
 @CrossOrigin(origins =  "*", maxAge = 360000)
@@ -28,6 +29,7 @@ import it.vincenzopicone.foodball.service.LocaleService;
 @RequestMapping("/api/locale")
 public class LocaleController {
 	
+	@Autowired LocaleRepository repo;
 	@Autowired LocaleService localeService;
 	@Autowired UserRepository userRepo;
 	
@@ -52,6 +54,12 @@ public class LocaleController {
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getLocalePerNomeParte(@PathVariable("nome") String nome){
 		return new ResponseEntity<>(localeService.getAllLocaleByName(nome), HttpStatus.OK);
+	}
+	
+	@GetMapping("/random")
+	public ResponseEntity<?> getRandomLocale () {
+		
+		return new ResponseEntity<List<Locale>>(repo.findByLocaleRandom8(), HttpStatus.OK);
 	}
 	
 

@@ -1,6 +1,7 @@
 package it.vincenzopicone.foodball.configuration;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Locale;
 
 import org.springframework.context.annotation.Bean;
@@ -26,4 +27,14 @@ public class PartitaConfiguration {
 				.build();
 	}
 
+	@Bean("PartitaDefault")
+	@Scope("prototype")
+	public Partita partitaDefault(LocalDate data, Long giorno, String squadra1, String squadra2) {
+		return Partita.builder()
+				.data(data.plusDays(giorno))
+				.orario(LocalTime.of(20, 30))
+				.squadra1(squadra1)
+				.squadra2(squadra2)
+				.build();
+	}
 }

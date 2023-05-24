@@ -1,6 +1,7 @@
 package it.vincenzopicone.foodball.payload;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +19,8 @@ public class CreaPrenotazioneDto {
 	private Long idevento;
 	private String usernameutente;
 	private int numeropersone;
+	private String note;
+	private LocalTime orario;
 	
 
 }

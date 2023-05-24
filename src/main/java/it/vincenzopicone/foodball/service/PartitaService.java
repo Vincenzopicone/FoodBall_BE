@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import it.vincenzopicone.foodball.faketeam.Squadra;
+import it.vincenzopicone.foodball.faketeam.SquadraRepository;
 import it.vincenzopicone.foodball.model.Partita;
 import it.vincenzopicone.foodball.repository.PartitaRepository;
 import jakarta.persistence.EntityExistsException;
@@ -19,12 +21,23 @@ import jakarta.persistence.EntityNotFoundException;
 public class PartitaService {
 	
 	@Autowired PartitaRepository repo;
+	@Autowired SquadraRepository squadraRepository;
 	@Autowired @Qualifier("PartitaRandom") private ObjectProvider<Partita> randomPartitaProvider;
+	@Autowired @Qualifier("PartitaDefault") private ObjectProvider<Partita> defaultPartitaProvider;
+	
 	
 	public Partita creaPartitaRandom(LocalDate date, Long giorno) {
 		Partita P = randomPartitaProvider.getObject(date, giorno);
 		return repo.save(P);
 	}
+	
+	public void creaPartitaDefault(LocalDate date, Long giorno) {
+		Squadra S1 = squadraRepository.findBySquadraRandom();
+		Squadra S2 = squadraRepository.findBySquadraRandom();
+		Partita P = defaultPartitaProvider.getObject(date, giorno, S1.getNome(), S2.getNome());
+		repo.save(P);
+	}
+	
 	
 	public List<Partita> getAllPartite() {
 		return (List<Partita>) repo.findAll();
