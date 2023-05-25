@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.vincenzopicone.foodball.faketeam.Squadra;
 import it.vincenzopicone.foodball.model.Evento;
 import it.vincenzopicone.foodball.model.Partita;
 import it.vincenzopicone.foodball.model.TipoLocale;
@@ -55,6 +56,11 @@ public class EventoController {
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getEventoPerCitta(@PathVariable String citta){
 		return new ResponseEntity<List<Evento>>(repo.findByCitta(citta), HttpStatus.OK);
+	}
+	@GetMapping("/citta/{citta}/squadra/{squadra}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getEventoPerCitta(@PathVariable String citta, String squadra){
+		return new ResponseEntity<List<Evento>>(repo.findByCittaAndPartita(citta, squadra), HttpStatus.OK);
 	}
 	@GetMapping("/citta/{citta}/tipolocale/{locale}")
 	@PreAuthorize("isAuthenticated()")

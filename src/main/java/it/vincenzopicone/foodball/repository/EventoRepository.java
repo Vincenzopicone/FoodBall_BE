@@ -11,6 +11,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import it.vincenzopicone.foodball.model.Evento;
+import it.vincenzopicone.foodball.model.Partita;
 import it.vincenzopicone.foodball.model.TipoLocale;
 
 
@@ -33,13 +34,16 @@ public interface EventoRepository extends CrudRepository<Evento, Long>, PagingAn
 	@Query("SELECT e FROM Evento e WHERE LOWER (e.citta) LIKE LOWER('%' || :citta || '%') ORDER BY e.data ASC")
 	List<Evento> findByCitta(String citta);
 	
-	@Query("SELECT e FROM Evento e WHERE LOWER (e.locale.nomelocale) LIKE LOWER('%' || :nome || '%')")
+	@Query("SELECT e FROM Evento e WHERE LOWER (e.locale.nomelocale) LIKE LOWER('%' || :nome || '%') ORDER BY e.data ASC")
 	List<Evento> findByNomelocale(String nome);
 	
-	@Query("SELECT e FROM Evento e WHERE LOWER (e.locale.tipolocale) LIKE LOWER('%' || :tipolocale || '%')")
+	@Query("SELECT e FROM Evento e WHERE LOWER (e.locale.tipolocale) LIKE LOWER('%' || :tipolocale || '%') ORDER BY e.data ASC")
 	List<Evento> findByTipolocale(String tipolocale);
 	
 	@Query("SELECT e FROM Evento e WHERE LOWER (e.citta) LIKE LOWER('%' || :citta || '%') AND e.locale.tipolocale = :locale ORDER BY e.data ASC" )
 	List<Evento> findByCittaAndTipolocale (String citta, TipoLocale locale);
+	
+	@Query("SELECT e FROM Evento e WHERE LOWER (e.citta) LIKE LOWER('%' || :citta || '%') AND e.partita.squadra1 = :squadra ORDER BY e.data ASC" )
+	List<Evento> findByCittaAndPartita (String citta, String squadra);
 	
 }

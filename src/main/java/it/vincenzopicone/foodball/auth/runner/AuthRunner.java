@@ -61,7 +61,7 @@ public class AuthRunner implements ApplicationRunner {
 		//setPartiteDefault();
 		//setPartitaRandom();//
 		//setLocaleRandom();
-		setEventiRandom();
+		//setEventiRandom();
 		//setPrenotazioniRandom();
 		
 		

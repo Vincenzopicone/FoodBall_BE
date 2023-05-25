@@ -17,7 +17,7 @@ public class LocaleConfiguration {
 	@Bean("LocaleRandom")
 	@Scope("prototype")
 	public Locale localeRandom(Integer i) {
-		Faker fake = new Faker();
+		Faker fake = new Faker(new java.util.Locale("it-IT"));
 		return Locale.builder()
 				.nomelocale("Pizzeria " + i)
 				.citta("Reggio Calabria")
