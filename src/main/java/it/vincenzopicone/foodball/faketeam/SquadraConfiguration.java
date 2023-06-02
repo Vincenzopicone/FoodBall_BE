@@ -87,6 +87,34 @@ public class SquadraConfiguration {
 		repo.save(S35);
 		Squadra S36 = new Squadra("Friburgo", "Bundesliga");
 		repo.save(S36);
+		////
+		Squadra S37 = new Squadra("Porto", "Liga Portugal");
+		repo.save(S37);
+		Squadra S38 = new Squadra("Benfica", "Liga Portugal");
+		repo.save(S38);
+		Squadra S39 = new Squadra("Sporting", "Liga Portugal");
+		repo.save(S39);
+		Squadra S39a = new Squadra("Braga", "Liga Portugal");
+		repo.save(S39a);
+		////
+		Squadra S40 = new Squadra("Ajax", "Eredivisie");
+		repo.save(S40);
+		Squadra S41 = new Squadra("Feyenoord", "Eredivisie");
+		repo.save(S41);
+		Squadra S42 = new Squadra("PSV", "Eredivisie");
+		repo.save(S42);
+		Squadra S43 = new Squadra("AZ", "Eredivisie");
+		repo.save(S43);
+		Squadra S44 = new Squadra("Tweente", "Eredivisie");
+		repo.save(S44);
+		Squadra S45 = new Squadra("Utrecht", "Eredivisie");
+		repo.save(S45);
+		////
+		Squadra S46 = new Squadra("Rangers", "Premiership");
+		repo.save(S46);
+		Squadra S47 = new Squadra("Celtic", "Premiership");
+		repo.save(S47);
+		////
 	}
 
 }

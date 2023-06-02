@@ -20,15 +20,30 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class LocaleService {
 	
-	@Autowired @Qualifier("LocaleRandom") private ObjectProvider<Locale> randomLocaleProvider;
-@Autowired LocaleRepository repo;
+	@Autowired @Qualifier("PizzeriaRandom") private ObjectProvider<Locale> pizzeriaProvider;
+	@Autowired @Qualifier("PubRandom") private ObjectProvider<Locale> pubProvider;
+	@Autowired @Qualifier("BurgerRandom") private ObjectProvider<Locale> burgerProvider;
+	@Autowired @Qualifier("RistoranteRandom") private ObjectProvider<Locale> ristoranteProvider;
+    @Autowired LocaleRepository repo;
 
 	public Locale creaLocale(Locale L) {
 		return repo.save(L);
 	}
 	
-	public Locale creaLocaleRandom (Integer i) {
-		Locale L = randomLocaleProvider.getObject(i);
+	public Locale creaPizzeriaRandom (Integer i, String citta) {
+		Locale L = pizzeriaProvider.getObject(i, citta);
+		return repo.save(L);
+	}
+	public Locale creaPubRandom (Integer i, String citta) {
+		Locale L = pubProvider.getObject(i, citta);
+		return repo.save(L);
+	}
+	public Locale creaRistoranteRandom (Integer i, String citta) {
+		Locale L = ristoranteProvider.getObject(i, citta);
+		return repo.save(L);
+	}
+	public Locale creaBurgerRandom (Integer i, String citta) {
+		Locale L = burgerProvider.getObject(i, citta);
 		return repo.save(L);
 	}
 
