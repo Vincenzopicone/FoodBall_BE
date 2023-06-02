@@ -66,7 +66,7 @@ public class AuthController {
     @PostMapping(value = {"/register", "/signup"})
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
         String response = authService.register(registerDto);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 	@PostMapping("/register/locale")
 	public ResponseEntity<?> createNewStore(@RequestBody CreaNuovoLocaleDto nuovoLocale) {
@@ -87,7 +87,7 @@ public class AuthController {
 		}
 		U.setLocale(L);
 //	    repo.save(U);
-		return new ResponseEntity<>(localeService.creaLocale(L), HttpStatus.CREATED);
+		return new ResponseEntity<>(localeService.creaLocale(L), HttpStatus.OK);
 	}
     
     @GetMapping("/profilo/{username}")

@@ -59,9 +59,17 @@ public class AuthRunner implements ApplicationRunner {
 		//setRoleDefault();
 		//squadraConfiguration.addSquadra();
 		//setPartiteDefault();
-		//setPartitaRandom();//
-		//setLocaleRandom();
-		//setEventiRandom();
+		
+//		setLocaleRandom("Milano");
+//		setLocaleRandom("Reggio Calabria");
+//		setLocaleRandom("Torino");
+//		setLocaleRandom("Roma");
+//		setLocaleRandom("Napoli");
+//		setLocaleRandom("Venezia");
+//		setLocaleRandom("Bologna");
+//		setLocaleRandom("Palermo");
+		
+//		setEventiRandom();
 		//setPrenotazioniRandom();
 		
 		
@@ -85,20 +93,31 @@ public class AuthRunner implements ApplicationRunner {
 		userRole.add(user);
 	}
 	
-	public void setPartitaRandom() {
-		for(Long i = 0l; i < 30l; i++) {
-		partitaService.creaPartitaRandom(LocalDate.of(2023, 6, 1), i);
-		}
-	}
+//	public void setPartitaRandom() {
+//		for(Long i = 1l; i < 30l; i++) {
+//		partitaService.creaPartitaRandom(LocalDate.of(2023, 6, 7), i);
+//		partitaService.creaPartitaRandom(LocalDate.of(2023, 6, 7), i);
+//		partitaService.creaPartitaRandom(LocalDate.of(2023, 6, 7), i);
+//		partitaService.creaPartitaRandom(LocalDate.of(2023, 6, 7), i);
+//		}
+//	}
+	
 	
 	public void setPartiteDefault() {
 		for(Long i = 0l; i < 30l; i++) {
-			partitaService.creaPartitaDefault(LocalDate.of(2023, 6, 1), i);
+			partitaService.creaPartitaDefault(LocalDate.of(2023, 6, 7), i);
+			partitaService.creaPartitaDefault(LocalDate.of(2023, 6, 7), i);
+			partitaService.creaPartitaDefault(LocalDate.of(2023, 6, 7), i);
+			partitaService.creaPartitaDefault(LocalDate.of(2023, 6, 7), i);
 			}		
 	}
-	public void setLocaleRandom() {
-		for(Integer i = 0; i < 30l; i++) {
-		localeService.creaLocaleRandom(i);
+	public void setLocaleRandom(String citta) {
+		
+		for(Integer i = 1; i < 15l; i++) {
+		localeService.creaPizzeriaRandom(i, citta);
+		localeService.creaPubRandom(i, citta);
+		localeService.creaRistoranteRandom(i, citta);
+		localeService.creaBurgerRandom(i, citta);
 		}
 	}
 	
